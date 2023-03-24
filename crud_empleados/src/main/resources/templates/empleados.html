@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" th:href="@{css/style.css}">
+</head>
+
+
+<body>
+    
+<div class="container">
+    <div class="nav">
+        <a >Empleados</a>
+        <a th:href="@{/departamento}">Departamentos</a>
+    </div>
+    <h1>Lista de empleados</h1>
+    <a class="add-btn" th:href="@{/empleado}">Agregar empleado</a>
+    
+    <table>
+        <thead>
+        <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Apellido 1</th>
+            <th>Apellido 2</th>
+            <th>Email</th>
+            <th>Departamento</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr th:each="empleado : ${empleadosLista}">
+            <td th:text="${empleado.codigo}"></td>
+            <td th:text="${empleado.nombre}"></td>
+            <td th:text="${empleado.apellido1}"></td>
+            <td th:text="${empleado.apellido2}"></td>
+            <td th:text="${empleado.email}"></td>
+            <td th:text="${empleado.departamento.codigo}"></td>
+            <td class="actions">
+                <a th:href="@{/editar/{codigo}(codigo=${empleado.codigo})}">Editar</a>
+                <br>
+                <a th:href="@{/eliminar/{codigo}(codigo=${empleado.codigo})}" onclick="return confirm('¿Estás seguro de que quieres eliminar este empleado?')">Eliminar</a>
+            </td>
+        </tr> 
+        </tbody>
+    </table>
+</div> 
+</body>
+</html>

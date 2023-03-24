@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar departamento</title>
+    <link rel="stylesheet" href="/css/crear_empleado.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Agregar departamento</h1>
+        <form th:action="@{/departamento}" th:object="${departamento}" method="POST">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" th:field="*{nombre}" id="nombre" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="Presupuesto">Presupuesto:</label>
+                <input type="text" th:field="*{Presupuesto}" id="Presupuesto" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="gastos">Gastos:</label>
+                <input type="text" th:field="*{gastos}" id="gastos" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+                <button  type="submit" class="btn btn-success">Guardar</button>
+                <a th:href="@{/departamento}" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

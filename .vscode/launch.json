@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-CrudEmpleadosApplication<crud_empleados>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.crud.crud_empleados.CrudEmpleadosApplication",
+            "projectName": "crud_empleados",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
