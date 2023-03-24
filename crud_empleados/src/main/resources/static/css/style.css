@@ -43,7 +43,6 @@ td:first-child {
 .actions a {
     display: inline-block;
     padding: 5px 10px;
-    background-color: #555;
     color: #fff;
     text-decoration: none;
     margin: 0 5px;
