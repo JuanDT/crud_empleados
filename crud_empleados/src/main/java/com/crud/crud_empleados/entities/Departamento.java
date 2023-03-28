@@ -23,12 +23,14 @@ public class Departamento {
 
     @Column(name = "nombre")
     private String nombre;
-
+    
     @Column(name = "presupuesto")
-    private Double presupuesto;
+    private double presupuesto;  
+
+  
 
     @Column(name = "gastos")
-    private Double gastos;
+    private double gastos;
 
     @OneToMany(mappedBy = "departamento", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Empleado> empleados = new ArrayList<>();

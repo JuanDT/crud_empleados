@@ -21,13 +21,18 @@
                     <input type="text" th:field="*{nombre}" id="nombre" class="form-control" required>
                 </div>
                 <div class="form-group col-5 mx-auto text-center">
-                    <label for="Presupuesto">Presupuesto:</label>
-                    <input type="text" th:field="*{Presupuesto}" id="Presupuesto" class="form-control" required>
+                    <label for="presupuesto">Presupuesto:</label>
+                    <input type="text" th:field="*{presupuesto}" id="presupuesto" class="form-control" onfocus="if(this.value==='0.0') this.value='';" onblur="if(this.value==='') this.value='0.0';" required>
+                    <p class="text-danger small" th:if="${param.error != null}" th:text="${param.error}"></p>
                 </div>
+               
+                
                 <div class="form-group col-5 mx-auto text-center">
                     <label for="gastos">Gastos:</label>
-                    <input type="text" th:field="*{gastos}" id="gastos" class="form-control" required>
+                    <input type="text" th:field="*{gastos}" id="gastos" class="form-control" onfocus="if(this.value==='0.0') this.value='';" onblur="if(this.value==='') this.value='0.0';" required>
+                    <p class="text-danger small" th:if="${param.error != null}" th:text="${param.error}"></p>
                 </div>
+                                  
                 
                 <div class="form-group col-5 mx-auto text-center">
                     <button  type="submit" class="btn btn-success">Guardar</button>

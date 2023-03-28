@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
 
 import com.crud.crud_empleados.entities.Departamento;
 import com.crud.crud_empleados.service.DepartamentoService;
@@ -33,20 +35,34 @@ public class DepartamentoController {
     }
 
     @PostMapping("/departamento")
-    public String guardarDepartamento(@ModelAttribute("departamento") Departamento departamento) {
+    public String guardarDepartamento(@ModelAttribute("departamento") Departamento departamento, BindingResult result) {
+        if (result.hasErrors()) {
+                   
+             return "redirect:/departamento/nuevo?error=Revisar formato no valido";
+        }else{                                   
         departamentoService.guardarDepartamento(departamento);
         return "redirect:/departamento";
+        }
     }
 
     @GetMapping("/departamento/editarDepartamento/{codigo}")
-    public String mostrarFormularioDeEditar(@PathVariable Long codigo, Model modelo) {
-        modelo.addAttribute("departamento", departamentoService.buscarDepartamentoPorCodigo(codigo));
-        return "editar_departamento";
-    }
+    public String mostrarFormularioDeEditar(@PathVariable Long codigo, Model modelo, @RequestParam(required = false) String error) {
+            Departamento departamento = departamentoService.buscarDepartamentoPorCodigo(codigo);
+       modelo.addAttribute("departamento", departamento);
+       modelo.addAttribute("error", error);
+       return "editar_departamento";
+}
+
 
     @PostMapping("/departamento/actualizarDepartamentos/{codigo}")
     public String actualizarDepartamento(@PathVariable Long codigo, @ModelAttribute("departamento") Departamento departamento,
-                                       Model modelo) {
+                                       Model modelo, BindingResult result) {
+        if (result.hasErrors()) {
+            
+            return "redirect:/departamento/editarDepartamento/{codigo}?error=Revisar formato no válido".replace("{codigo}", String.valueOf(codigo));
+
+         }else{
+
         Departamento departamentoExistente = departamentoService.buscarDepartamentoPorCodigo(codigo);
         departamentoExistente.setNombre(departamento.getNombre());
         departamentoExistente.setPresupuesto(departamento.getPresupuesto());
@@ -55,6 +71,7 @@ public class DepartamentoController {
         departamentoService.actualizarDepartamento(departamentoExistente);
         return "redirect:/departamento";
     }
+}
 
     @GetMapping("/eliminarDepartamento/{codigo}")
     public String eliminarDepartamento(@PathVariable Long codigo) {
